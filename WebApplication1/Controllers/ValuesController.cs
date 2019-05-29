@@ -12,31 +12,14 @@ using System.IO;
 
 namespace WebApplication1.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("order")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
 
         public ShopStantlyGroup3 httpMachine = new ShopStantlyGroup3(new Uri("https://cyrill-fueglister.outsystemscloud.com/EAI/rest"), new AnonymousCredential());
         
-        // GET api/values
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
-        {
-            //InvoiceRequest invRequest = new InvoiceRequest(12,123,"testcustomer","testAddress");
-            //t.Invoicepost(invRequest);
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
-        {
-            InvoiceState invState = httpMachine.Invoiceget(id);
-            return (invState.OrderId.ToString() + ";" + invState.PaymentState.ToString());
-        }
-
-        // POST api/values
+        // POST 
         [HttpPost]
         public ActionResult<string> Post([FromBody] Order order)
         {
